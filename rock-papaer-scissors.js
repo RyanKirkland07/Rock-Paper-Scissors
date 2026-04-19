@@ -4,19 +4,69 @@
     decide winner
 */
 
-const rock = 0;
-const paper = 1;
-const scissors = 2;
+const ROCK = 0;
+const PAPER = 1;
+const SCISSORS = 2;
 
-function rockpaperscissors(){
-    let cont = 1;
-    while(cont != 0){
+const WIN = "You Win";
+const LOSE = "You Lose";
+const DRAW = "Draw";
+
+function playRound(rounds){
+    let result;
+
+    let userScore = 0;
+    let computerScore = 0;
+
+    while(rounds > 0){
         let computerChoice = computerDecision();
         let userChoice = userDecision();
-        console.log(winner(userChoice, computerChoice));
-        cont = prompt("Continue? (any for yes 0; 0 for no)")
-    }
 
+        if(userChoice == "rock"){
+            if(computerChoice == ROCK){
+                result = DRAW;
+            }
+            else if(computerChoice == PAPER){
+                result = LOSE;
+            }
+            else if(computerChoice == SCISSORS){
+                result = WIN;
+            }
+        }
+        else if(userChoice == "paper"){
+            if(computerChoice == ROCK){
+                result = WIN;
+            }
+            else if(computerChoice == PAPER){
+                result = DRAW;
+            }
+            else if(computerChoice == SCISSORS){
+                result = LOSE;
+            }
+        }
+        else if(userChoice == "scissors"){
+            if(computerChoice == ROCK){
+                result = LOSE;
+            }
+            else if(computerChoice == PAPER){
+                result = WIN;
+            }
+            else if(computerChoice == SCISSORS){
+                result = DRAW;
+            }
+        }
+
+        if(result == WIN){
+            userScore += 1;
+        }
+        else if(result == LOSE){
+            computerScore += 1;
+        }
+
+        console.log(result);
+        console.log(`You: ${userScore}; Computer: ${computerScore}`)
+        rounds = rounds - 1;
+    }
 }
 
 function computerDecision(){
@@ -34,41 +84,5 @@ function userDecision(){
     return decision;
 }
 
-function winner(userDecision, computerDecision){
-    if(userDecision == "rock"){
-        if(computerDecision == rock){
-            return "Draw"
-        }
-        else if(computerDecision == paper){
-            return "You Lose"
-        }
-        else if(computerDecision == scissors){
-            return "You Win"
-        }
-    }
-    else if(userDecision == "paper"){
-        if(computerDecision == rock){
-            return "You Win"
-        }
-        else if(computerDecision == paper){
-            return "Draw"
-        }
-        else if(computerDecision == scissors){
-            return "You Lose"
-        }
-    }
-    else if(userDecision == "scissors"){
-        if(computerDecision == rock){
-            return "You Lose"
-        }
-        else if(computerDecision == paper){
-            return "You Win"
-        }
-        else if(computerDecision == scissors){
-            return "Draw"
-        }
-    }
-}
-
-rockpaperscissors();
+playRound(5);
 console.log("test");
