@@ -9,19 +9,27 @@ const PAPER = 1;
 const SCISSORS = 2;
 
 const WIN = "You Win";
-const LOSE = "You Lose";
+const LOSE = "Computer Wins";
 const DRAW = "Draw";
 
 const rockBtn = document.querySelector("#rock-btn");
 const paperBtn = document.querySelector("#paper-btn");
 const scissorsBtn = document.querySelector("#scissors-btn");
 
+const resultDiv = document.querySelector("#results");
+
+const winner = document.createElement("h1");
+resultDiv.append(winner);
+const scores = document.createElement("p");
+resultDiv.append(scores);
+
+
+let userScore = 0;
+let computerScore = 0;
+
 
 function playRound(event){
     let result;
-
-    let userScore = 0;
-    let computerScore = 0;
 
     let computerChoice = computerDecision();
     let userChoice = userDecision(event.target.id);
@@ -67,9 +75,21 @@ function playRound(event){
         computerScore += 1;
     }
 
-    console.log(result);
-    console.log(`You: ${userScore}; Computer: ${computerScore}`)
-    
+    winner.textContent = result;
+    scores.textContent = `You: ${userScore}; Computer: ${computerScore}`;
+
+    if(userScore == 5){
+        winner.textContent = "User Wins Best of 9";
+        scores.textContent = "Pick again to play another match"
+        userScore = 0;
+        computerScore = 0;
+    }
+    else if(computerScore == 5){
+        winner.textContent = "Computer Wins Best of 9";
+        scores.textContent = "Pick again to play another match"
+        userScore = 0;
+        computerScore = 0;
+    }
 }
 
 function computerDecision(){
