@@ -18,55 +18,54 @@ function playRound(rounds){
     let userScore = 0;
     let computerScore = 0;
 
-    while(rounds > 0){
-        let computerChoice = computerDecision();
-        let userChoice = userDecision();
+    let computerChoice = computerDecision();
+    let userChoice = userDecision();
 
-        if(userChoice == "rock"){
-            if(computerChoice == ROCK){
-                result = DRAW;
-            }
-            else if(computerChoice == PAPER){
-                result = LOSE;
-            }
-            else if(computerChoice == SCISSORS){
-                result = WIN;
-            }
+    if(userChoice == "rock"){
+        if(computerChoice == ROCK){
+            result = DRAW;
         }
-        else if(userChoice == "paper"){
-            if(computerChoice == ROCK){
-                result = WIN;
-            }
-            else if(computerChoice == PAPER){
-                result = DRAW;
-            }
-            else if(computerChoice == SCISSORS){
-                result = LOSE;
-            }
+        else if(computerChoice == PAPER){
+            result = LOSE;
         }
-        else if(userChoice == "scissors"){
-            if(computerChoice == ROCK){
-                result = LOSE;
-            }
-            else if(computerChoice == PAPER){
-                result = WIN;
-            }
-            else if(computerChoice == SCISSORS){
-                result = DRAW;
-            }
+        else if(computerChoice == SCISSORS){
+            result = WIN;
         }
-
-        if(result == WIN){
-            userScore += 1;
-        }
-        else if(result == LOSE){
-            computerScore += 1;
-        }
-
-        console.log(result);
-        console.log(`You: ${userScore}; Computer: ${computerScore}`)
-        rounds = rounds - 1;
     }
+    else if(userChoice == "paper"){
+        if(computerChoice == ROCK){
+            result = WIN;
+        }
+        else if(computerChoice == PAPER){
+            result = DRAW;
+        }
+        else if(computerChoice == SCISSORS){
+            result = LOSE;
+        }
+    }
+    else if(userChoice == "scissors"){
+        if(computerChoice == ROCK){
+            result = LOSE;
+        }
+        else if(computerChoice == PAPER){
+            result = WIN;
+        }
+        else if(computerChoice == SCISSORS){
+            result = DRAW;
+        }
+    }
+
+    if(result == WIN){
+        userScore += 1;
+    }
+    else if(result == LOSE){
+        computerScore += 1;
+    }
+
+    console.log(result);
+    console.log(`You: ${userScore}; Computer: ${computerScore}`)
+    rounds = rounds - 1;
+    
 }
 
 function computerDecision(){
