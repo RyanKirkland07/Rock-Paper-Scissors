@@ -12,16 +12,21 @@ const WIN = "You Win";
 const LOSE = "You Lose";
 const DRAW = "Draw";
 
-function playRound(rounds){
+const rockBtn = document.querySelector("#rock-btn");
+const paperBtn = document.querySelector("#paper-btn");
+const scissorsBtn = document.querySelector("#scissors-btn");
+
+
+function playRound(event){
     let result;
 
     let userScore = 0;
     let computerScore = 0;
 
     let computerChoice = computerDecision();
-    let userChoice = userDecision();
+    let userChoice = userDecision(event.target.id);
 
-    if(userChoice == "rock"){
+    if(userChoice == ROCK){
         if(computerChoice == ROCK){
             result = DRAW;
         }
@@ -32,7 +37,7 @@ function playRound(rounds){
             result = WIN;
         }
     }
-    else if(userChoice == "paper"){
+    else if(userChoice == PAPER){
         if(computerChoice == ROCK){
             result = WIN;
         }
@@ -43,7 +48,7 @@ function playRound(rounds){
             result = LOSE;
         }
     }
-    else if(userChoice == "scissors"){
+    else if(userChoice == SCISSORS){
         if(computerChoice == ROCK){
             result = LOSE;
         }
@@ -64,7 +69,6 @@ function playRound(rounds){
 
     console.log(result);
     console.log(`You: ${userScore}; Computer: ${computerScore}`)
-    rounds = rounds - 1;
     
 }
 
@@ -74,14 +78,17 @@ function computerDecision(){
     return decision;
 }
 
-function userDecision(){
-    let decision = prompt("rock, paper, or scissors").toLowerCase();
-    if(decision != "rock" && decision != "paper" && decision != "scissors"){
-        throw new Error("User made illegal move")
+function userDecision(btnId){
+    switch(btnId){
+        case rockBtn.id:
+            return ROCK;
+        case paperBtn.id:
+            return PAPER;
+        case scissorsBtn.id:
+            return SCISSORS;
     }
-    
-    return decision;
 }
 
-playRound(5);
-console.log("test");
+rockBtn.addEventListener('click', playRound);
+paperBtn.addEventListener('click', playRound);
+scissorsBtn.addEventListener('click', playRound);
